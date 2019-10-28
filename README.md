@@ -27,3 +27,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+28/10/2019:
+Objectif : Créer un questionnaire dynamique et finir l'enregistrement des utilisateurs
+- Objectif atteint : Enregistrement des utilisateurs dans coucheDB

@@ -1,8 +1,7 @@
 <template>
   <v-app>
-    <div id="app">
+    <div id="app" style="margin-top: 20px;">
       <div id="nav"></div>
-      <Information/>
       <router-view/>
     </div>
   </v-app>

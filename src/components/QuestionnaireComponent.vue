@@ -1,88 +1,109 @@
 <template>
-    <div class="questionnaire">
-        <template>
-            <v-stepper v-model="e1">
-                <v-stepper-header >
-
-                    <v-stepper-step v-for="question in questions" v-bind:key="question" :step="increment(index)" >{{question.title}}</v-stepper-step>
-
-                    <v-divider></v-divider>
-
-                    <!--<v-stepper-step :complete="e1 > 2" step="2">Name of step 2</v-stepper-step>
-
-                    <v-divider></v-divider>
-
-                    <v-stepper-step step="3">Name of step 3</v-stepper-step>-->
-                </v-stepper-header>
-
-                <v-stepper-items>
-                    <v-stepper-content v-for="question in questions" v-bind:key="question" step="1">
-                        <v-card
-                                class="mb-12"
-                                color="grey lighten-1"
-                                height="200px"
-                        ></v-card>
-
-                        <v-btn
-                                color="primary"
-                                @click="e1 = 2"
-                        >
-                            Continue
-                        </v-btn>
-
-                        <v-btn text>Cancel</v-btn>
-                    </v-stepper-content>
-
-                    <v-stepper-content step="2">
-                        <v-card
-                                class="mb-12"
-                                color="grey lighten-1"
-                                height="200px"
-                        ></v-card>
-
-                        <v-btn
-                                color="primary"
-                                @click="e1 = 3"
-                        >
-                            Continue
-                        </v-btn>
-
-                        <v-btn text>Cancel</v-btn>
-                    </v-stepper-content>
-                </v-stepper-items>
-            </v-stepper>
-        </template>
+    <div class="questionnaire" style="margin-top: 30px">
+        <div class="container h-100">
+            <div class="d-flex justify-content-center h-100">
+                <div class="user_card" style="width: 550px" v-if="isFinish == false">
+                    <div class="d-flex justify-content-center">
+                        <div class="brand_logo_container">
+                            <img src="../content/logo.png" class="brand_logo" alt="Logo">
+                        </div>
+                    </div>
+                    <div class="container">
+                        <p style="text-align: center; color: white; margin-top: 50px; ">Question {{step}}/{{maxQuestion}} : {{questions[step - 1].question}}</p>
+                        <div class="input-group" v-for="response in questions[step].data" v-bind:key="response.response" style="padding-bottom: 10px;">
+                            <input type="text" class="form-control" aria-label="Text input with radio button" :value="response.response" disabled>
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="button" aria-label="Radio button for following text input" v-on:click="registerQuestion(response)" :name="'button_' + response.step " value="Valider">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user_card" style="width: 550px" v-if="isFinish == true">
+                    <div class="d-flex justify-content-center">
+                        <div class="brand_logo_container">
+                            <img src="../content/logo.png" class="brand_logo" alt="Logo">
+                        </div>
+                    </div>
+                    <div class="container">
+                        <p style="color: white; text-align: center;">Score : {{score}}/{{maxQuestion}}</p>
+                        <div class="input-group mb-3">
+                            <button type="button" class="btn btn-secondary form-control" v-on:click="redirectHome()">Retourner au menu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import json from '../content/question.json'
+import PouchDB from 'pouchdb'
+
+var db = new PouchDB('http://localhost:5984/users')
+var dbConfig = new PouchDB('http://localhost:5984/config')
 export default {
   name: 'QuestionnaireComponent',
   data () {
     return {
-      e1: 0,
-      index: 1,
-      questions: [
-        {
-          'id': 1,
-          'title': 'Question 1',
-          'data': 'Quelle est la taille de mon pénis ?'
-        },
-        {
-          'id': 2,
-          'title': 'Question 2',
-          'data': 'Quelle est votre durée pour un rapport sexuel'
-        }
-      ]
+      step: 1,
+      response: '',
+      questions: json,
+      resultUser: [],
+      items: {},
+      maxQuestion: 0,
+      isFinish: false,
+      score: 0
     }
   },
   methods: {
-   user: function () {
-     return this.$route.params.user
-   },
-    increment: function (index) {
-      return index + 1
+    // Permet de récupérer l'id de l'utilisateur depuis la base de données - 28/10/2019
+    user: function () {
+      return this.$route.params.user
+    },
+    // Permet d'enregistrer le score de l'utilisateur à chaque fois qu'il valide une proposition - 18/11/2019
+    registerQuestion: function (response) {
+      if (response.good) {
+        this.score += 1
+      }
+
+      this.items = {
+        id: this.questions[this.step - 1].id,
+        result: response.good,
+        question: this.questions[this.step - 1].question
+      }
+      this.resultUser.push(this.items)
+      if (this.step >= this.maxQuestion) {
+        this.isFinish = true
+        this.addDbResult()
+      } else {
+        this.step += 1
+      }
+    },
+    // Permet d'ajouter le résultat dans la base de données - 18/11/2019
+    addDbResult: function () {
+      var self = this
+      db.get(this.user()).then(function (doc) {
+        doc.score = self.score
+        doc.questions = self.resultUser
+        return db.put(doc)
+      })
+    },
+    // Permet de rediriger vers la page principale du site - 18/11/2019
+    redirectHome: function () {
+      this.$router.push({
+        name: 'information'
+      })
     }
+  },
+  // Permet de lancer la fonction lors du chargement de la page - 18/11/2019
+  created: function () {
+    var self = this
+    dbConfig.get('a45067be05ced19ec4fde4e0d2000ce0').then(function (doc) {
+      self.maxQuestion = doc.nbQuestions
+    })
   }
 }
 </script>

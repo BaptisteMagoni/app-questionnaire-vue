@@ -15,7 +15,7 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" name="form-firstname" v-model="prenom" class="form-control input_user" value="" placeholder="Prénom">
+                                    <input type="text" name="form-firstname" v-model="prenom" class="form-control input_user" value="" placeholder="Prénom" >
                                 </div>
                                 <div class="input-group mb-3" v-if="admin == false">
                                     <div class="input-group-append">
@@ -36,21 +36,12 @@
                                     <input type="password" name="form-company" v-model="mdpAdmin" class="form-control input_pass" value="" placeholder="Mot de passe ...">
                                 </div>
                                 <button v-if="admin == true" type="button" v-on:click="redirectAdminPage()" class="btn btn-secondary form-control">Se connecter</button>
-                                <button v-if="admin == false" type="button" v-on:click="addDB(prenom, nom, societe)" class="btn btn-secondary form-control">Commencer le test</button>
+                                <button v-if="admin == false" type="button" name="btn" v-on:click="addDB(prenom, nom, societe)" class="btn btn-secondary form-control">Commencer le test</button>
 
                                 <p style="text-align: center; margin-top: 10px;"><input type="checkbox" value="Admin" name="adm" v-on:click="changeConnect()" class="form-check-input">
                                 <label for="adm" style="color: white" class="form-check-label"> Admin</label></p>
                             </form>
                         </div>
-
-                    <!--<div class="mt-4">
-                        <div class="d-flex justify-content-center links">
-                            Don't have an account? <a href="#" class="ml-2">Sign Up</a>
-                        </div>
-                        <div class="d-flex justify-content-center links">
-                            <a href="#">Forgot your password?</a>
-                        </div>
-                    </div>-->
                 </div>
             </div>
         </div>
@@ -71,7 +62,8 @@ export default {
       prenom: '',
       nom: '',
       societe: '',
-      mdpAdmin: ''
+      mdpAdmin: '',
+      btnState: false
     }
   },
   methods: {

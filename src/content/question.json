@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "question": "Pourquoi vous devez portez des EPI dans la zone industrielle",
+    "question": "Pourquoi vous devez portez des EPI dans la zone industrielle ?",
     "data": [
       {
         "response": "Nous devons nous protéger des dangers",
@@ -19,15 +19,15 @@
   },
   {
     "id": 1,
-    "question": "A quoi servent les passages piétons dans les entreprôts",
+    "question": "A quoi servent les passages piétons dans les entreprôts ?",
     "data": [
       {
         "response": "A faire beau",
-        "good": true
+        "good": false
       },
       {
         "response": "A eviter les engins à moteur",
-        "good": false
+        "good": true
       },
       {
         "response": "Car c'est pour combler le budget lors de la création de l'entrepôts",
@@ -37,144 +37,162 @@
   },
   {
     "id": 2,
-    "question": "A quoi servent les passages piétons dans les entreprôts",
+    "question": "Comment évaluez-vous l'importance de la sécurité au travail ?",
     "data": [
       {
-        "response": "A faire beau",
+        "response": "Très important",
         "good": true
       },
       {
-        "response": "A eviter les engins à moteur",
+        "response": "Important",
         "good": false
       },
       {
-        "response": "Car c'est pour combler le budget lors de la création de l'entrepôts",
+        "response": "Peu important",
         "good": false
       }
     ]
   },
   {
     "id": 3,
-    "question": "A quoi servent les passages piétons dans les entreprôts",
+    "question": "Faire de la prévention c'est :",
     "data": [
       {
-        "response": "A faire beau",
-        "good": true
-      },
-      {
-        "response": "A eviter les engins à moteur",
+        "response": "Défendre quelqu'un contre un danger.",
         "good": false
       },
       {
-        "response": "Car c'est pour combler le budget lors de la création de l'entrepôts",
+        "response": "Prendre un ensemble de mesures destinées à éviter un accident qu'on peut prévoir.",
+        "good": true
+      },
+      {
+        "response": "Prévenir les secours spécialisés lorsqu'un accident s'est produit.",
         "good": false
       }
     ]
   },
   {
     "id": 4,
-    "question": "A quoi servent les passages piétons dans les entreprôts",
+    "question": "Les neufs principes généraux de prévention sont-ils régis par :",
     "data": [
       {
-        "response": "A faire beau",
+        "response": "le code du travail",
         "good": true
       },
       {
-        "response": "A eviter les engins à moteur",
+        "response": "le code pénal",
         "good": false
       },
       {
-        "response": "Car c'est pour combler le budget lors de la création de l'entrepôts",
+        "response": "le code civil",
         "good": false
       }
     ]
   },
   {
     "id": 5,
-    "question": "A quoi servent les passages piétons dans les entreprôts",
+    "question": "Qu'est ce qu'une situation dangereuse ?",
     "data": [
       {
-        "response": "A faire beau",
-        "good": true
-      },
-      {
-        "response": "A eviter les engins à moteur",
+        "response": "Lorsqu'un secouriste du travail doit porter secours à un collègue",
         "good": false
       },
       {
-        "response": "Car c'est pour combler le budget lors de la création de l'entrepôts",
+        "response": "Lorsqu'une personne est exposée à un danger",
+        "good": true
+      },
+      {
+        "response": "Lorsqu'un salarié ne porte pas ces équipements de protection individuelle",
         "good": false
       }
     ]
   },
   {
     "id": 6,
-    "question": "A quoi servent les passages piétons dans les entreprôts",
+    "question": "La meilleure façon de supprimer le risque est de:",
     "data": [
       {
-        "response": "A faire beau",
+        "response": "supprimer le danger",
         "good": true
       },
       {
-        "response": "A eviter les engins à moteur",
+        "response": "retirer l'opérateur",
         "good": false
       },
       {
-        "response": "Car c'est pour combler le budget lors de la création de l'entrepôts",
+        "response": "renforcer les consignes de sécurité",
         "good": false
       }
     ]
   },
   {
     "id": 7,
-    "question": "A quoi servent les passages piétons dans les entreprôts",
+    "question": "Combien y a-t-il de principes généraux de prévention ?",
     "data": [
       {
-        "response": "A faire beau",
-        "good": true
-      },
-      {
-        "response": "A eviter les engins à moteur",
+        "response": "8",
         "good": false
       },
       {
-        "response": "Car c'est pour combler le budget lors de la création de l'entrepôts",
+        "response": "9",
+        "good": true
+      },
+      {
+        "response": "10",
         "good": false
       }
     ]
   },
   {
     "id": 8,
-    "question": "A quoi servent les passages piétons dans les entreprôts",
+    "question": "La présence d'une douche est systématiquement obligatoire sur les chantiers",
     "data": [
       {
-        "response": "A faire beau",
+        "response": "Vrai",
         "good": true
       },
       {
-        "response": "A eviter les engins à moteur",
+        "response": "Faux",
         "good": false
       },
       {
-        "response": "Car c'est pour combler le budget lors de la création de l'entrepôts",
+        "response": "Je ne sais pas",
         "good": false
       }
     ]
   },
   {
     "id": 9,
-    "question": "A quoi servent les passages piétons dans les entreprôts",
+    "question": "La présence d'une douche est systématiquement obligatoire sur les chantiers",
     "data": [
       {
-        "response": "A faire beau",
+        "response": "Vrai",
         "good": true
       },
       {
-        "response": "A eviter les engins à moteur",
+        "response": "Faux",
         "good": false
       },
       {
-        "response": "Car c'est pour combler le budget lors de la création de l'entrepôts",
+        "response": "Je ne sais pas",
+        "good": false
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Quelle réponse est la bonne ?",
+    "data": [
+      {
+        "response": "Moi",
+        "good": true
+      },
+      {
+        "response": "Pas moi",
+        "good": false
+      },
+      {
+        "response": "Non pas moi",
         "good": false
       }
     ]

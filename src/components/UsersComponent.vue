@@ -17,7 +17,7 @@
                 <td>{{user.doc.nom}}</td>
                 <td>{{user.doc.societe}}</td>
                 <td>{{user.doc.score}}</td>
-                <td><button type="button" class="btn btn-primary" data-toggle="modal" :data-target="'#'+user.doc.nom+user.doc.prenom">Détails</button></td>
+                <td><button type="button" class="btn btn-primary" data-toggle="modal" :data-target="'#'+user.doc.nom+user.doc.prenom" v-on:click="createQuestion(user.doc._id)">Détails</button></td>
 
                 <!-- Modal -->
                 <div class="modal fade" :id="user.doc.nom+user.doc.prenom" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -30,24 +30,24 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <table class="table table-dark">
-                                    <thead>
-                                        <tr style="color: black">
-                                            <th scope="col">Question</th>
-                                            <th scope="col">Résultat</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="response in user.doc.questions" :key="response.result" style="color: black">
-                                            <th scope="row">{{response.question}}</th>
-                                            <td v-if="response.result == true">+1</td>
-                                            <td v-if="response.result == false">+0</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="container" v-for="quest in user_question" :key="quest.id">
+                                    <div class="form-group" style="text-align: left">
+                                        <p style="color: black;">{{quest.question}}</p>
+                                    </div>
+                                    <div class="form-group" v-for="rep in questions[quest.id].data" :key="rep.id" style="text-align: left">
+                                        <input v-if="rep.response === quest.resp" class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled checked>
+                                        <input v-if="rep.response !== quest.resp" class="form-check-input" type="checkbox" value="" id="defaultCheck" disabled>
+                                        <label v-if="rep.good === true" class="form-check-label" for="defaultCheck2" style="color: green">
+                                            {{rep.response}}
+                                        </label>
+                                        <label v-if="rep.good === false" class="form-check-label" for="defaultCheck2" style="color: red">
+                                            {{rep.response}}
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermet</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                             </div>
                         </div>
                     </div>
@@ -64,11 +64,12 @@ import json from '../content/question.json'
 var db = new PouchDB('http://localhost:5984/users')
 export default {
   name: 'UsersComponent',
-  json_quest: json,
   count: 1,
   data: () => {
     return {
-      users: null
+      users: null,
+      questions: json,
+      user_question: {}
     }
   },
   methods: {
@@ -76,6 +77,12 @@ export default {
     redirectAdminPage: function () {
       this.$router.push({
         name: 'admin'
+      })
+    },
+    createQuestion: function (user) {
+      var self = this
+      db.get(user).then(function (doc) {
+        self.user_question = doc.questions
       })
     }
   },

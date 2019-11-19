@@ -28,14 +28,14 @@
                                         <div class="modal-body">
                                             <form style="align-items: center">
                                                 <div class="form-group" align="center">
-                                                    <label for="formGroupExampleInput">Le nombre de question actuel est de {{nbActualQuestion}}</label>
+                                                    <label for="formGroupExampleInput">Le nombre de question actuel est de {{nbQuestion}}</label>
                                                     <input type="number" class="form-control" id="formGroupExampleInput" v-model="nbQuestion" placeholder="Nombre de question">
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                            <button type="button" class="btn btn-primary" v-on:click="saveNbQuestion()">Enregistrer vos modification</button>
+                                            <button type="button" class="btn btn-primary" v-on:click="saveNbQuestion()" data-dismiss="modal">Enregistrer vos modification</button>
                                         </div>
                                     </div>
                                 </div>
@@ -64,21 +64,17 @@ export default {
   name: 'AdminComponent',
   data: () => {
     return {
-      nbQuestion: 0, // Variable pour le nombre de question - 18/11/2019
-      nbActualQuestion: 0 // Variable pour le nombre actuel de question - 18/11/2019
+      nbQuestion: 0 // Variable pour le nombre de question - 18/11/2019
     }
   },
   methods: {
     // Permet de sauvegarder le nombre de question entré par l'utilisateur - 18/11/2019
     saveNbQuestion: function () {
       var self = this
-      console.log('Save nb')
       db.get('a45067be05ced19ec4fde4e0d2000ce0').then(function (doc) { // Permet de récupérer le json depuis pouchdb - 18/11/2019
-        console.log(doc)
         doc.nbQuestions = self.nbQuestion
         return db.put(doc) // Permet de modifier le json - 18/11/2019
       })
-      location.reload() // Permet de reload la page - 18/11/2019
     },
     // Permet de rediriger vers la page users - 18/11/2019
     redirectResponseUsers: function () {

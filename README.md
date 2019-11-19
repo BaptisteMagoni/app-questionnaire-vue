@@ -42,3 +42,14 @@ de toute les questions aux quelles il a répondu.
 
 Info sur l'application:
 Le mot de passe admin est : admin
+
+Info pouchdb
+
+Pour avoir toute la configuration de pouchdb sur le github 
+il y'a un répertoire 'utils' qui contient la table config : qui contient la configuration du site 
+(besoins de créer la table config avec comme nom : 'a45067be05ced19ec4fde4e0d2000ce0')
+Le contenu se trouve à l'intérieur du fichier
+
+Pour la table user il suffit juste créer une table portant le nom de users
+
+Si un problème avant de faire un scandale :joy: envoie moi un msg au 06 64 96 40 31

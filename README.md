@@ -46,13 +46,15 @@ Le mot de passe admin est : admin
 Info pouchdb
 
 Pour avoir toute la configuration de pouchdb sur le github 
-il y'a un répertoire 'utils' qui contient la table config : qui contient la configuration du site 
-(besoins de créer la table config avec comme nom : 'a45067be05ced19ec4fde4e0d2000ce0')
-Attention : Supprimer le _rev pour que la modification puisse fonctionner
+Pour que le site fonctionne il faut créer (sur pouchdb):
+- Une table config : Pour cela il faut copier le fichier src/utils/a45067be05ced19ec4fde4e0d2000ce0.json
 Le contenu se trouve à l'intérieur du fichier
 
-Pour la table users il suffit juste créer une table portant le nom de users
+- Pour finir il faut créer une table users 
 
 Si un problème avant de faire un scandale :joy: envoie moi un msg au 06 64 96 40 31
 
-Attention ne pas utiliser la version github, mais de download le projet et de lancer avec npm
+Dans pouchdb il faut ajouter "baptistemagoni.github.io" dans les configuration de pouchdb 
+(il faut aller dans l'oglet config et ensuite dans cors et l'ajouter en nom de domaine)
+
+Attention : Sans cette configuration le site ne fonctionnera pas
